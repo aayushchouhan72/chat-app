@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hubbub</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="auth" class="auth">
+  <form id="authForm">
+    <h1>Hubbub</h1>
+    <p id="authHint">Sign in to pick up your conversations.</p>
+    <label>Username<input name="username" autocomplete="username" required minlength="3" maxlength="20"></label>
+    <label>Password<input name="password" type="password" autocomplete="current-password" required minlength="6"></label>
+    <p id="authError" class="error" role="alert"></p>
+    <button class="primary" id="authSubmit">Sign in</button>
+    <button type="button" class="link" id="authToggle">New here? Create an account</button>
+  </form>
+</main>
+
+<div id="app" class="app hidden">
+  <aside class="side">
+    <header>
+      <div class="avatar" id="meAvatar"></div>
+      <strong id="meName"></strong>
+      <span class="spacer"></span>
+      <button class="icon" id="newBtn" title="Start a chat">+</button>
+      <button class="icon" id="logoutBtn" title="Sign out">⎋</button>
+    </header>
+    <ul id="chatList" class="chat-list"></ul>
+  </aside>
+
+  <section class="pane">
+    <div id="empty" class="empty">Pick a conversation, or press + to start one.</div>
+    <div id="chat" class="chat hidden">
+      <header>
+        <button class="icon back" id="backBtn" title="Back">‹</button>
+        <div class="avatar" id="chatAvatar"></div>
+        <div><strong id="chatName"></strong><div id="chatStatus" class="status"></div></div>
+      </header>
+      <div id="msgs" class="msgs"></div>
+      <form id="composer" class="composer">
+        <input type="file" id="file" accept="image/*,.pdf" hidden>
+        <button type="button" class="icon" id="attachBtn" title="Attach image or PDF">📎</button>
+        <input id="text" placeholder="Type a message" autocomplete="off" maxlength="4000">
+        <button class="primary">Send</button>
+      </form>
+    </div>
+  </section>
+</div>
+
+<div id="modal" class="modal hidden">
+  <div class="sheet">
+    <div class="tabs">
+      <button id="tabDirect" class="on">Direct message</button>
+      <button id="tabGroup">New group</button>
+      <button class="icon" id="closeModal" title="Close">✕</button>
+    </div>
+    <input id="groupName" placeholder="Group name" class="hidden" maxlength="40">
+    <input id="search" placeholder="Search people">
+    <ul id="userList" class="user-list"></ul>
+    <p id="modalError" class="error"></p>
+    <button class="primary hidden" id="createGroup">Create group</button>
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
